@@ -2,8 +2,8 @@ function SquareGame.new 0
 push constant 3
 call Memory.alloc 1
 pop pointer 0
-push constant 100
-push constant 200
+push constant 1
+push constant 150
 push constant 50
 call Barrier.new 3
 pop this 2
@@ -98,9 +98,6 @@ push local 1
 not
 not
 if-goto WHILE_END0
-push pointer 0
-call SquareGame.moveBarrier 1
-pop temp 0
 label WHILE_EXP1
 push local 0
 push constant 0
@@ -111,6 +108,9 @@ call Keyboard.keyPressed 0
 pop local 0
 push pointer 0
 call SquareGame.moveSquare 1
+pop temp 0
+push pointer 0
+call SquareGame.moveBarrier 1
 pop temp 0
 goto WHILE_EXP1
 label WHILE_END1

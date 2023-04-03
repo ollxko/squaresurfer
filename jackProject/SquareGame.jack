@@ -5,7 +5,7 @@ class SquareGame {
 
    /** Constructs a new Square Game. */
    constructor SquareGame new() {
-      let barrier1 = Barrier.new(100, 200, 50);
+      let barrier1 = Barrier.new(1, 150, 50);
       let square = Square.new(0, 0, 30);
       let direction = 0;  // initial state is no movement
       return this;
@@ -44,10 +44,10 @@ class SquareGame {
       
       while (~exit) {
          // waits for a key to be pressed
-         do moveBarrier();
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSquare();
+            do moveBarrier();
          }
          if (key = 81)  { let exit = true; }     // q key
          if (key = 90)  { do square.decSize(); } // z key

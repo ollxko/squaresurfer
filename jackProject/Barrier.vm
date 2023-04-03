@@ -21,6 +21,24 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
+function Barrier.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push constant 5
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
 function Barrier.draw 0
 push argument 0
 pop pointer 0
@@ -43,15 +61,20 @@ return
 function Barrier.move 0
 push argument 0
 pop pointer 0
+push this 0
+push constant 500
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop this 0
+label IF_FALSE0
 push constant 0
 call Screen.setColor 1
 pop temp 0
 push this 0
 push this 1
-push this 2
-add
-push constant 1
-sub
 push this 0
 push constant 5
 add
@@ -60,10 +83,10 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
-push this 1
-push constant 1
-sub
-pop this 1
+push this 0
+push constant 2
+add
+pop this 0
 push constant 0
 not
 call Screen.setColor 1
@@ -71,10 +94,10 @@ pop temp 0
 push this 0
 push this 1
 push this 0
-push this 2
+push constant 5
 add
 push this 1
-push constant 1
+push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0

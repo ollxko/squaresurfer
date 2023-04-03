@@ -18,6 +18,13 @@ class Barrier
         return;
     }
 
+    method void erase() 
+    {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, x + 5, y + size);
+        return;
+   }
+
     method void draw() 
     {
         do Screen.setColor(true);
@@ -27,11 +34,12 @@ class Barrier
 
     method void move() 
     {
+        if (x > 500) { let x = 0;}
         do Screen.setColor(false);
-        do Screen.drawRectangle(x, (y + size) - 1, x + 5, y + size);
-        let y = y - 1;
+        do Screen.drawRectangle(x, y, x + 5, y + size);
+        let x = x + 2;
         do Screen.setColor(true);
-        do Screen.drawRectangle(x, y, x + size, y + 1);
+        do Screen.drawRectangle(x, y, x + 5, y + size);
         return;
     }
 }
