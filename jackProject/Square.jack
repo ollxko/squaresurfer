@@ -18,6 +18,10 @@ class Square {
       return this;
    }
 
+   method int getX() { return x; }
+   method int getY() { return y; }
+   method int getSize() { return size; }
+
    /** Disposes this square. */
    method void dispose() {
       do Memory.deAlloc(this);
@@ -35,26 +39,6 @@ class Square {
    method void erase() {
       do Screen.setColor(false);
       do Screen.drawRectangle(x, y, x + size, y + size);
-      return;
-   }
-
-    /** Increments the square size by 2 pixels. */
-   method void incSize() {
-      if (((y + size) < 254) & ((x + size) < 510)) {
-         do erase();
-         let size = size + 2;
-         do draw();
-      }
-      return;
-   }
-
-   /** Decrements the square size by 2 pixels. */
-   method void decSize() {
-      if (size > 2) {
-         do erase();
-         let size = size - 2;
-         do draw();
-      }
       return;
    }
 
@@ -78,30 +62,6 @@ class Square {
          let y = y + 2;
          do Screen.setColor(true);
          do Screen.drawRectangle(x, (y + size) - 1, x + size, y + size);
-      }
-      return;
-   }
-
-   /** Moves the square left by 2 pixels. */
-   method void moveLeft() {
-      if (x > 1) {
-         do Screen.setColor(false);
-         do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
-         let x = x - 2;
-         do Screen.setColor(true);
-         do Screen.drawRectangle(x, y, x + 1, y + size);
-      }
-      return;
-   }
-
-   /** Moves the square right by 2 pixels. */
-   method void moveRight() {
-      if ((x + size) < 510) {
-         do Screen.setColor(false);
-         do Screen.drawRectangle(x, y, x + 1, y + size);
-         let x = x + 2;
-         do Screen.setColor(true);
-         do Screen.drawRectangle((x + size) - 1, y, x + size, y + size);
       }
       return;
    }

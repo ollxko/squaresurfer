@@ -2,11 +2,14 @@ class SquareGame {
    field Square square;
    field int direction;
    field Barrier barrier1;
+   field Barrier barrier2;
    field int randomVar;
+   field int randomVar2;
 
    /** Constructs a new Square Game. */
    constructor SquareGame new() {
-      let barrier1 = Barrier.new(1, 150, 50);
+      let barrier1 = Barrier.new(100, 150, 70);
+      let barrier2 = Barrier.new(1, 20, 70);
       let square = Square.new(400, 150, 30);
       let direction = 0;  // initial state is no movement
       return this;
@@ -24,8 +27,6 @@ class SquareGame {
    method void moveSquare() {
       if (direction = 1) { do square.moveUp(); }
       if (direction = 2) { do square.moveDown(); }
-      if (direction = 3) { do square.moveLeft(); }
-      if (direction = 4) { do square.moveRight(); }
       do Sys.wait(2);  // delays the next movement
       return;
    }
@@ -44,9 +45,19 @@ class SquareGame {
       return 0;
    }
 
+      method int doRandom2(int integer)
+   {
+      var int a;
+      let integer = integer * 11 + 12;
+      let a = remained(integer, 200);
+      if (a < 200 & a > 0) { return a; }
+      return 0;
+   }
+
    method void moveBarrier()
    {
       do barrier1.move(randomVar);
+      do barrier2.move(randomVar);
       do Sys.wait(2);
       return;
    }
@@ -57,6 +68,7 @@ class SquareGame {
       var boolean exit;
       let exit = false;
       let randomVar = 1;
+      let randomVar2 = 5;
 
       while (~exit) {
          // waits for a key to be pressed
@@ -65,14 +77,49 @@ class SquareGame {
             do moveSquare();
             do moveBarrier();
             let randomVar = doRandom(randomVar);
+            let randomVar2 = doRandom2(randomVar2);
+            if 
+            ( 
+               (
+                  ( barrier1.getX() = square.getX() ) 
+                  & 
+                  ( barrier1.getY() < square.getY() ) 
+                  & 
+                  ( ( barrier1.getY() + barrier1.getSize() ) > square.getY() )
+               ) 
+               |
+               (
+                  ( barrier1.getX() = square.getX() ) 
+                  & 
+                  ( barrier1.getY() < ( square.getY() + square.getSize() ) ) 
+                  & 
+                  ( ( barrier1.getY() + barrier1.getSize() ) > ( square.getY() + square.getSize() ) )
+               ) 
+            ) 
+            { let exit = true; }
+                        if 
+            ( 
+               (
+                  ( barrier2.getX() = square.getX() ) 
+                  & 
+                  ( barrier2.getY() < square.getY() ) 
+                  & 
+                  ( ( barrier2.getY() + barrier2.getSize() ) > square.getY() )
+               ) 
+               |
+               (
+                  ( barrier2.getX() = square.getX() ) 
+                  & 
+                  ( barrier2.getY() < ( square.getY() + square.getSize() ) ) 
+                  & 
+                  ( ( barrier2.getY() + barrier2.getSize() ) > ( square.getY() + square.getSize() ) )
+               ) 
+            ) 
+            { let exit = true; }
          }
          if (key = 81)  { let exit = true; }     // q key
-         if (key = 90)  { do square.decSize(); } // z key
-         if (key = 88)  { do square.incSize(); } // x key
          if (key = 131) { let direction = 1; }   // up arrow
          if (key = 133) { let direction = 2; }   // down arrow
-         if (key = 130) { let direction = 3; }   // left arrow
-         if (key = 132) { let direction = 4; }   // right arrow
 
          // waits for the key to be released
          while (~(key = 0)) {
@@ -80,6 +127,7 @@ class SquareGame {
             do moveSquare();
          }
      } // while
+     do Output.printString(" YOU ARE TOO BAD!!!!!!!!!!!");
      return;
    }
 }

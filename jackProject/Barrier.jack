@@ -13,6 +13,10 @@ class Barrier
         return this;
    }
 
+    method int getX() { return x; }
+    method int getY() { return y; }
+    method int getSize() { return size; }
+
     method void dispose() 
     {
         do Memory.deAlloc(this);
@@ -40,7 +44,7 @@ class Barrier
             let x = 0; 
             let y = randomedY; 
             do Screen.setColor(false);
-            do Screen.drawRectangle(0, 0, 500, 20);
+            do Screen.drawRectangle(0, 0, 500, 200);
             do Output.printInt(score + 1);
             let score = score + 1;
         }

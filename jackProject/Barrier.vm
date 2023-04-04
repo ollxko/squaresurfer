@@ -13,6 +13,21 @@ call Barrier.draw 1
 pop temp 0
 push pointer 0
 return
+function Barrier.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Barrier.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Barrier.getSize 0
+push argument 0
+pop pointer 0
+push this 2
+return
 function Barrier.dispose 0
 push argument 0
 pop pointer 0
@@ -77,7 +92,7 @@ pop temp 0
 push constant 0
 push constant 0
 push constant 500
-push constant 20
+push constant 200
 call Screen.drawRectangle 4
 pop temp 0
 push this 3
