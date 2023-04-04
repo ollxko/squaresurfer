@@ -1,5 +1,5 @@
 function SquareGame.new 0
-push constant 3
+push constant 4
 call Memory.alloc 1
 pop pointer 0
 push constant 1
@@ -7,8 +7,8 @@ push constant 150
 push constant 50
 call Barrier.new 3
 pop this 2
-push constant 0
-push constant 0
+push constant 400
+push constant 150
 push constant 30
 call Square.new 3
 pop this 0
@@ -72,18 +72,55 @@ push this 0
 call Square.moveRight 1
 pop temp 0
 label IF_FALSE3
-push constant 5
+push constant 2
 call Sys.wait 1
 pop temp 0
+push constant 0
+return
+function SquareGame.remained 0
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+call MathExtends.mod 2
+return
+function SquareGame.doRandom 1
+push argument 0
+pop pointer 0
+push argument 1
+push constant 11
+call Math.multiply 2
+push constant 12
+add
+pop argument 1
+push pointer 0
+push argument 1
+push constant 200
+call SquareGame.remained 3
+pop local 0
+push local 0
+push constant 200
+lt
+push local 0
+and
+push constant 0
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+return
+label IF_FALSE0
 push constant 0
 return
 function SquareGame.moveBarrier 0
 push argument 0
 pop pointer 0
 push this 2
-call Barrier.move 1
+push this 3
+call Barrier.move 2
 pop temp 0
-push constant 5
+push constant 2
 call Sys.wait 1
 pop temp 0
 push constant 0
@@ -93,6 +130,8 @@ push argument 0
 pop pointer 0
 push constant 0
 pop local 1
+push constant 1
+pop this 3
 label WHILE_EXP0
 push local 1
 not
@@ -112,6 +151,10 @@ pop temp 0
 push pointer 0
 call SquareGame.moveBarrier 1
 pop temp 0
+push pointer 0
+push this 3
+call SquareGame.doRandom 2
+pop this 3
 goto WHILE_EXP1
 label WHILE_END1
 push local 0

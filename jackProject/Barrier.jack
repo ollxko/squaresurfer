@@ -2,6 +2,7 @@ class Barrier
 {
     field int x, y;
     field int size;
+    field int score;
 
    constructor Barrier new(int Ax, int Ay, int Asize) 
    {
@@ -32,9 +33,17 @@ class Barrier
         return;
     }
 
-    method void move() 
+    method void move(int randomedY) 
     {
-        if (x > 500) { let x = 0;}
+        if (x > 500) 
+        { 
+            let x = 0; 
+            let y = randomedY; 
+            do Screen.setColor(false);
+            do Screen.drawRectangle(0, 0, 500, 20);
+            do Output.printInt(score + 1);
+            let score = score + 1;
+        }
         do Screen.setColor(false);
         do Screen.drawRectangle(x, y, x + 5, y + size);
         let x = x + 2;

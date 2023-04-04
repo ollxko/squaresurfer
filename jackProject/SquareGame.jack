@@ -2,11 +2,12 @@ class SquareGame {
    field Square square;
    field int direction;
    field Barrier barrier1;
+   field int randomVar;
 
    /** Constructs a new Square Game. */
    constructor SquareGame new() {
       let barrier1 = Barrier.new(1, 150, 50);
-      let square = Square.new(0, 0, 30);
+      let square = Square.new(400, 150, 30);
       let direction = 0;  // initial state is no movement
       return this;
    }
@@ -25,14 +26,28 @@ class SquareGame {
       if (direction = 2) { do square.moveDown(); }
       if (direction = 3) { do square.moveLeft(); }
       if (direction = 4) { do square.moveRight(); }
-      do Sys.wait(5);  // delays the next movement
+      do Sys.wait(2);  // delays the next movement
       return;
+   }
+
+   method int remained(int x, int y)
+   {
+      return MathExtends.mod(x, y);
+   }
+
+   method int doRandom(int integer)
+   {
+      var int a;
+      let integer = integer * 11 + 12;
+      let a = remained(integer, 200);
+      if (a < 200 & a > 0) { return a; }
+      return 0;
    }
 
    method void moveBarrier()
    {
-      do barrier1.move();
-      do Sys.wait(5);
+      do barrier1.move(randomVar);
+      do Sys.wait(2);
       return;
    }
 
@@ -41,13 +56,15 @@ class SquareGame {
       var char key;  // the key currently pressed by the user
       var boolean exit;
       let exit = false;
-      
+      let randomVar = 1;
+
       while (~exit) {
          // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSquare();
             do moveBarrier();
+            let randomVar = doRandom(randomVar);
          }
          if (key = 81)  { let exit = true; }     // q key
          if (key = 90)  { do square.decSize(); } // z key
