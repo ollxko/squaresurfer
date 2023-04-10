@@ -37,16 +37,20 @@ class Barrier
         return;
     }
 
-    method void move(int randomedY) 
+    method void move(int randomedY, Square sqwr) 
     {
         if (x > 500) 
         { 
             let x = 0; 
             let y = randomedY; 
-            do Screen.setColor(false);
-            do Screen.drawRectangle(0, 0, 500, 200);
-            do Output.printInt(score + 1);
-            let score = score + 1;
+            if ( size = 69 ) 
+            {
+                do Screen.setColor(false);
+                do Screen.drawRectangle(0, 0, 511, 255);
+                do sqwr.draw();
+                do Output.printInt(score + 1);
+                let score = score + 1;
+            }
         }
         do Screen.setColor(false);
         do Screen.drawRectangle(x, y, x + 5, y + size);

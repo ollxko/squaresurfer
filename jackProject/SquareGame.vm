@@ -9,7 +9,7 @@ call Barrier.new 3
 pop this 2
 push constant 1
 push constant 20
-push constant 70
+push constant 69
 call Barrier.new 3
 pop this 3
 push constant 400
@@ -80,7 +80,7 @@ add
 pop argument 1
 push pointer 0
 push argument 1
-push constant 200
+push constant 185
 call SquareGame.remained 3
 pop local 0
 push local 0
@@ -132,11 +132,13 @@ push argument 0
 pop pointer 0
 push this 2
 push this 4
-call Barrier.move 2
+push this 0
+call Barrier.move 3
 pop temp 0
 push this 3
 push this 4
-call Barrier.move 2
+push this 0
+call Barrier.move 3
 pop temp 0
 push constant 2
 call Sys.wait 1
@@ -328,6 +330,9 @@ call Keyboard.keyPressed 0
 pop local 0
 push pointer 0
 call SquareGame.moveSquare 1
+pop temp 0
+push pointer 0
+call SquareGame.moveBarrier 1
 pop temp 0
 goto WHILE_EXP2
 label WHILE_END2

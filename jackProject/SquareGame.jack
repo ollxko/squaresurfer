@@ -6,16 +6,14 @@ class SquareGame {
    field int randomVar;
    field int randomVar2;
 
-   /** Constructs a new Square Game. */
    constructor SquareGame new() {
       let barrier1 = Barrier.new(100, 150, 70);
-      let barrier2 = Barrier.new(1, 20, 70);
+      let barrier2 = Barrier.new(1, 20, 69);
       let square = Square.new(400, 150, 30);
-      let direction = 0;  // initial state is no movement
+      let direction = 0;
       return this;
    }
 
-   /** Disposes this game. */
    method void dispose() {
       do barrier.dispose();
       do square.dispose();
@@ -23,11 +21,10 @@ class SquareGame {
       return;
    }
 
-   /** Moves the square in the current direction. */
    method void moveSquare() {
       if (direction = 1) { do square.moveUp(); }
       if (direction = 2) { do square.moveDown(); }
-      do Sys.wait(2);  // delays the next movement
+      do Sys.wait(2);
       return;
    }
 
@@ -40,7 +37,7 @@ class SquareGame {
    {
       var int a;
       let integer = integer * 11 + 12;
-      let a = remained(integer, 200);
+      let a = remained(integer, 185);
       if (a < 200 & a > 0) { return a; }
       return 0;
    }
@@ -56,22 +53,20 @@ class SquareGame {
 
    method void moveBarrier()
    {
-      do barrier1.move(randomVar);
-      do barrier2.move(randomVar);
+      do barrier1.move(randomVar, square);
+      do barrier2.move(randomVar, square);
       do Sys.wait(2);
       return;
    }
 
-   /** Runs the game: handles the user's inputs and moves the square accordingly */
    method void run() {
-      var char key;  // the key currently pressed by the user
+      var char key;
       var boolean exit;
       let exit = false;
       let randomVar = 1;
       let randomVar2 = 5;
 
       while (~exit) {
-         // waits for a key to be pressed
          while (key = 0) {
             let key = Keyboard.keyPressed();
             do moveSquare();
@@ -97,7 +92,7 @@ class SquareGame {
                ) 
             ) 
             { let exit = true; }
-                        if 
+            if 
             ( 
                (
                   ( barrier2.getX() = square.getX() ) 
@@ -117,16 +112,16 @@ class SquareGame {
             ) 
             { let exit = true; }
          }
-         if (key = 81)  { let exit = true; }     // q key
-         if (key = 131) { let direction = 1; }   // up arrow
-         if (key = 133) { let direction = 2; }   // down arrow
+         if (key = 81)  { let exit = true; }
+         if (key = 131) { let direction = 1; }
+         if (key = 133) { let direction = 2; }
 
-         // waits for the key to be released
          while (~(key = 0)) {
             let key = Keyboard.keyPressed();
             do moveSquare();
+            do moveBarrier();
          }
-     } // while
+     }
      do Output.printString(" YOU ARE TOO BAD!!!!!!!!!!!");
      return;
    }
