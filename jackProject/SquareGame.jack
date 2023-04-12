@@ -91,7 +91,7 @@ class SquareGame {
                   ( ( barrier1.getY() + barrier1.getSize() ) > ( square.getY() + square.getSize() ) )
                ) 
             ) 
-            { let exit = true; }
+            { do Output.printString(" YOU ARE TOO BAD!!!!!!!!!!!"); return; }
             if 
             ( 
                (
@@ -110,7 +110,7 @@ class SquareGame {
                   ( ( barrier2.getY() + barrier2.getSize() ) > ( square.getY() + square.getSize() ) )
                ) 
             ) 
-            { let exit = true; }
+            { do Output.printString(" YOU ARE TOO BAD!!!!!!!!!!!"); return; }
          }
          if (key = 81)  { let exit = true; }
          if (key = 131) { let direction = 1; }
@@ -122,7 +122,6 @@ class SquareGame {
             do moveBarrier();
          }
      }
-     do Output.printString(" YOU ARE TOO BAD!!!!!!!!!!!");
      return;
    }
 }
