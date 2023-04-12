@@ -48,6 +48,7 @@ class Barrier
                 do Screen.setColor(false);
                 do Screen.drawRectangle(0, 0, 511, 255);
                 do sqwr.draw();
+                do Output.moveCursor(0, 0);
                 do Output.printInt(score + 1);
                 let score = score + 1;
             }

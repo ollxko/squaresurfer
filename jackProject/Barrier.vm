@@ -104,6 +104,10 @@ pop temp 0
 push argument 2
 call Square.draw 1
 pop temp 0
+push constant 0
+push constant 0
+call Output.moveCursor 2
+pop temp 0
 push this 3
 push constant 1
 add
